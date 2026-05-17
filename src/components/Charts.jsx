@@ -94,7 +94,7 @@ export default function Charts({ danhSachGiaoDich }) {
       const pt = ((top.value / tongChi) * 100).toFixed(1);
       return (
         <div className="chart-insight chi">
-          <p>💡 Bạn đã chi <strong>{pt}%</strong> ngân sách cho <strong>{top.name}</strong>. Đây là hạng mục chi tiêu lớn nhất.</p>
+          <p> Bạn đã chi <strong>{pt}%</strong> ngân sách cho <strong>{top.name}</strong>. Đây là hạng mục chi tiêu lớn nhất.</p>
         </div>
       );
     }
@@ -103,7 +103,7 @@ export default function Charts({ danhSachGiaoDich }) {
       const pt = ((top.value / tongThu) * 100).toFixed(1);
       return (
         <div className="chart-insight thu">
-          <p>💰 <strong>{top.name}</strong> là nguồn thu nhập chủ lực, chiếm <strong>{pt}%</strong> tổng thu của bạn.</p>
+          <p> <strong>{top.name}</strong> là nguồn thu nhập chủ lực, chiếm <strong>{pt}%</strong> tổng thu của bạn.</p>
         </div>
       );
     }
@@ -111,7 +111,7 @@ export default function Charts({ danhSachGiaoDich }) {
       if (tongThu === 0 && tongChi > 0) {
         return (
           <div className="chart-insight canh-bao">
-            <p>⚠️ Bạn đang chi tiêu <strong>{dinhDangTien(tongChi)}</strong> trong khi chưa có thu nhập. Hãy cân đối lại!</p>
+            <p> Bạn đang chi tiêu <strong>{dinhDangTien(tongChi)}</strong> trong khi chưa có thu nhập. Hãy cân đối lại!</p>
           </div>
         );
       }
@@ -121,13 +121,13 @@ export default function Charts({ danhSachGiaoDich }) {
       if (tongThu >= tongChi) {
         return (
           <div className="chart-insight du">
-            <p>✅ Ổn định: Tổng chi tiêu chiếm <strong>{ptChiTrenThu}%</strong> thu nhập. Bạn tiết kiệm được <strong>{dinhDangTien(tongThu - tongChi)}</strong>.</p>
+            <p> Ổn định: Tổng chi tiêu chiếm <strong>{ptChiTrenThu}%</strong> thu nhập. Bạn tiết kiệm được <strong>{dinhDangTien(tongThu - tongChi)}</strong>.</p>
           </div>
         );
       } else {
         return (
           <div className="chart-insight canh-bao">
-            <p>⚠️ Báo động: Chi tiêu đã vượt <strong>{ptChiTrenThu}%</strong> so với thu nhập. Bạn đang thâm hụt <strong>{dinhDangTien(tongChi - tongThu)}</strong>.</p>
+            <p> Báo động: Chi tiêu đã vượt <strong>{ptChiTrenThu}%</strong> so với thu nhập. Bạn đang thâm hụt <strong>{dinhDangTien(tongChi - tongThu)}</strong>.</p>
           </div>
         );
       }
