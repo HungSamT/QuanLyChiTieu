@@ -1,15 +1,23 @@
 import { dinhDangTien, dinhDangNgay } from '../utils/dinhDang';
-import { layIconTheoHangMuc } from '../utils/hangMuc';
 import TransactionForm from './TransactionForm';
 
-export default function TransactionList({ 
-  danhSachGiaoDich, 
-  idGiaoDichDangSua, 
-  chonGiaoDichSua, 
+export default function TransactionList({
+  danhSachGiaoDich,
+  idGiaoDichDangSua,
+  chonGiaoDichSua,
   xoaGiaoDich,
   luuGiaoDichSua,
-  huySua
+  huySua,
+  danhSachHangMucChi,
+  danhSachHangMucThu
 }) {
+  const layIconTheoHangMuc = (tenHangMuc, loaiGiaoDich) => {
+            const danhSach = loaiGiaoDich === 'chi' ? danhSachHangMucChi : danhSachHangMucThu;
+            const hangMuc = danhSach?.find(hm => hm.ten === tenHangMuc);
+           return hangMuc?.icon || 'circle-ellipsis';
+        };
+
+
   const xuLyXoa = (id) => {
     if (window.confirm('Bạn có chắc chắn muốn xóa giao dịch này?')) {
       xoaGiaoDich(id);
@@ -32,10 +40,12 @@ export default function TransactionList({
           if (idGiaoDichDangSua === gd.id) {
             return (
               <div key={gd.id} className="inline-form-wrapper">
-                <TransactionForm 
-                  giaoDichSua={gd} 
-                  luuGiaoDich={luuGiaoDichSua} 
-                  huySua={huySua} 
+                <TransactionForm
+                  giaoDichSua={gd}
+                  luuGiaoDich={luuGiaoDichSua}
+                  huySua={huySua}
+                  danhSachHangMucChi={danhSachHangMucChi}
+                  danhSachHangMucThu={danhSachHangMucThu}
                 />
               </div>
             );
@@ -44,35 +54,35 @@ export default function TransactionList({
           return (
             <div key={gd.id} className="transaction-item">
               <div className="transaction-icon">
-                <img 
-                  src={`https://unpkg.com/lucide-static@latest/icons/${layIconTheoHangMuc(gd.danhMuc, gd.loaiGiaoDich)}.svg`} 
-                  width={24} height={24} 
-                  alt={gd.danhMuc} 
+                <img
+                  src={`https://unpkg.com/lucide-static@latest/icons/${layIconTheoHangMuc(gd.danhMuc, gd.loaiGiaoDich)}.svg`}
+                  width={24} height={24}
+                  alt={gd.danhMuc}
                 />
               </div>
-              
+
               <div className="transaction-info">
                 <div className="transaction-title">{gd.danhMuc}</div>
                 <div className="transaction-desc">{gd.ghiChu || gd.danhMuc}</div>
               </div>
-              
+
               <div className="transaction-details">
                 <div className={`transaction-amount ${gd.loaiGiaoDich}`}>
                   {gd.loaiGiaoDich === 'chi' ? '-' : '+'}{dinhDangTien(gd.soTien)}
                 </div>
                 <div className="transaction-date">{dinhDangNgay(gd.ngay)}</div>
               </div>
-              
+
               <div className="transaction-actions">
-                <button 
-                  className="btn-action edit" 
+                <button
+                  className="btn-action edit"
                   onClick={() => chonGiaoDichSua(gd.id)}
                   title="Sửa"
                 >
                   <img src="https://unpkg.com/lucide-static@latest/icons/pencil.svg" width={16} height={16} alt="Sửa" />
                 </button>
-                <button 
-                  className="btn-action delete" 
+                <button
+                  className="btn-action delete"
                   onClick={() => xuLyXoa(gd.id)}
                   title="Xóa"
                 >

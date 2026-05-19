@@ -1,35 +1,72 @@
 import { useState, useEffect } from 'react';
 
 export function useTransactions() {
-  const [danhSachGiaoDich, setDanhSachGiaoDich] = useState(() => {
-    const duLieuLuu = localStorage.getItem('danhSachGiaoDich');
-    if (duLieuLuu) {
+  const [danhSachGiaoDich, setDanhSachGiaoDich] = useState([]);
+  useEffect(()=>{
+    async function layGiaodich() {
       try {
-        const parsed = JSON.parse(duLieuLuu);
-        // Sort initial data descending by date
-        return parsed.sort((a, b) => new Date(b.ngay).getTime() - new Date(a.ngay).getTime());
+        const response = await fetch("http://localhost:3001/giaoDich")
+        const dataGiaoDich= await response.json();
+        console.log("lấy dta ", dataGiaoDich);
+        const dataSapXep = dataGiaoDich.sort((a, b) => new Date(b.ngay).getTime() - new Date(a.ngay).getTime());
+        setDanhSachGiaoDich(dataSapXep);
+        
       } catch (error) {
-        console.error("Lỗi khi đọc dữ liệu", error);
+        console.log("lỗi ",error);
+        
       }
+    }layGiaodich()
+  },[])
+  
+ 
+
+  const luuGiaoDich = async (giaoDichMoi) => {
+    try {
+      const response = await fetch("http://localhost:3001/giaoDich",{
+        method:'POST',
+        headers: {
+                    'Content-Type': 'application/json',},
+        body : JSON.stringify(giaoDichMoi),
+      })
+      const dataGiaoDich = await response.json();
+      setDanhSachGiaoDich((prev)=>{
+        const arrGiaoDich =[...prev,dataGiaoDich];
+        return arrGiaoDich.sort((a,b)=>new Date(b.ngay).getTime()-new Date(a.ngay).getTime());
+      });
+    } catch (error) {
+      console.log("lôi ",error);
+      
     }
-    return [];
-  });
-
-  // Lưu dữ liệu vào LocalStorage
-  useEffect(() => {
-    localStorage.setItem('danhSachGiaoDich', JSON.stringify(danhSachGiaoDich));
-  }, [danhSachGiaoDich]);
-
-  const luuGiaoDich = (giaoDichMoi) => {
-    setDanhSachGiaoDich(prev => [giaoDichMoi, ...prev].sort((a, b) => new Date(b.ngay).getTime() - new Date(a.ngay).getTime()));
   };
 
-  const luuGiaoDichSua = (giaoDichSua) => {
-    setDanhSachGiaoDich(prev => prev.map(gd => gd.id === giaoDichSua.id ? giaoDichSua : gd).sort((a, b) => new Date(b.ngay).getTime() - new Date(a.ngay).getTime()));
+ const luuGiaoDichSua = async (giaoDichSua) => {
+    try {
+      const response = await fetch(`http://localhost:3001/giaoDich/${giaoDichSua.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(giaoDichSua),
+      });
+      const dataGiaoDich = await response.json();
+      setDanhSachGiaoDich((prev) => {
+        const arrGiaoDich = prev.map((gd) => (gd.id === dataGiaoDich.id ? dataGiaoDich : gd));
+        return arrGiaoDich.sort((a, b) => new Date(b.ngay).getTime() - new Date(a.ngay).getTime());
+      });
+    } catch (error) {
+      console.log("lôi ", error);
+    }
   };
 
-  const xoaGiaoDich = (id) => {
-    setDanhSachGiaoDich(prev => prev.filter(gd => gd.id !== id));
+  const xoaGiaoDich = async (id) => {
+    try {
+      await fetch(`http://localhost:3001/giaoDich/${id}`, {
+        method: 'DELETE',
+      });
+      setDanhSachGiaoDich((prev) => prev.filter((gd) => gd.id !== id));
+    } catch (error) {
+      console.log("lôi ", error);
+    }
   };
 
   return {

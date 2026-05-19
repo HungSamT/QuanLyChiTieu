@@ -1,0 +1,141 @@
+{
+  "giaoDich": [
+    {
+      "id": "CXUGPUY-KPs",
+      "loaiGiaoDich": "thu",
+      "soTien": 10000000,
+      "danhMuc": "Khác",
+      "ghiChu": "",
+      "ngay": "2026-05-19"
+    },
+    {
+      "id": "j1igA7Y3JoY",
+      "loaiGiaoDich": "thu",
+      "soTien": 3000000,
+      "danhMuc": "Đầu tư",
+      "ghiChu": "",
+      "ngay": "2026-05-19"
+    },
+    {
+      "loaiGiaoDich": "thu",
+      "soTien": 3000000,
+      "danhMuc": "Lương",
+      "ghiChu": "",
+      "ngay": "2026-05-19",
+      "id": "sHbc323H6kM"
+    },
+    {
+      "loaiGiaoDich": "chi",
+      "soTien": 4000000,
+      "danhMuc": "Ăn uống",
+      "ghiChu": "",
+      "ngay": "2026-05-19",
+      "id": "r3Dt55a8sOI"
+    },
+    {
+      "id": "VoDzLVWcNdY",
+      "loaiGiaoDich": "thu",
+      "soTien": 5000000,
+      "danhMuc": "lãi",
+      "ghiChu": "",
+      "ngay": "2026-05-19"
+    },
+    {
+      "id": "KChqD80EkeE",
+      "loaiGiaoDich": "chi",
+      "soTien": 5000000,
+      "danhMuc": "Mua sắm",
+      "ghiChu": "",
+      "ngay": "2026-05-19"
+    },
+    {
+      "loaiGiaoDich": "chi",
+      "soTien": 3000000,
+      "danhMuc": "Giải trí",
+      "ghiChu": "",
+      "ngay": "2026-05-19",
+      "id": "SAf-QyC2qGg"
+    }
+  ],
+  "hangMuc": [
+    {
+      "id": "an-uong",
+      "ten": "Ăn uống",
+      "loai": "chi",
+      "icon": "utensils"
+    },
+    {
+      "id": "di-chuyen",
+      "ten": "Di chuyển",
+      "loai": "chi",
+      "icon": "car"
+    },
+    {
+      "id": "mua-sam",
+      "ten": "Mua sắm",
+      "loai": "chi",
+      "icon": "shopping-bag"
+    },
+    {
+      "id": "giai-tri",
+      "ten": "Giải trí",
+      "loai": "chi",
+      "icon": "gamepad-2"
+    },
+    {
+      "id": "y-te",
+      "ten": "Y tế",
+      "loai": "chi",
+      "icon": "heart-pulse"
+    },
+    {
+      "id": "hoa-don",
+      "ten": "Hóa đơn",
+      "loai": "chi",
+      "icon": "receipt"
+    },
+    {
+      "id": "khac-chi",
+      "ten": "Khác",
+      "loai": "chi",
+      "icon": "circle-ellipsis"
+    },
+    {
+      "id": "luong",
+      "ten": "Lương",
+      "loai": "thu",
+      "icon": "wallet"
+    },
+    {
+      "id": "dau-tu",
+      "ten": "Đầu tư",
+      "loai": "thu",
+      "icon": "wallet"
+    },
+    {
+      "id": "khac-thu",
+      "ten": "Khác",
+      "loai": "thu",
+      "icon": "circle-ellipsis"
+    },
+    {
+      "ten": "hạng mục test",
+      "loai": "chi",
+      "icon": "circle-ellipsis",
+      "id": "3zf_QfbeGuA"
+    },
+    {
+      "ten": "lãi",
+      "loai": "thu",
+      "icon": "wallet",
+      "id": "GBMEAPEwxNc"
+    },
+    {
+      "ten": "game",
+      "loai": "chi",
+      "icon": "circle-ellipsis",
+      "id": "yivqVOCvb3k"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

@@ -7,11 +7,12 @@ import Charts from './components/Charts';
 import FilterBar from './components/FilterBar';
 import { useTransactions } from './hooks/useTransactions';
 import { useFilters } from './hooks/useFilters';
+import { useCategories } from './hooks/useCategories';
 
 function App() {
   const { danhSachGiaoDich, luuGiaoDich, luuGiaoDichSua: luuSuaHook, xoaGiaoDich } = useTransactions();
   const { thangLoc, setThangLoc, namLoc, setNamLoc, danhSachLoc } = useFilters(danhSachGiaoDich);
-  
+  const {danhSachHangMucChi,danhSachHangMucThu,themHangMuc} = useCategories();
   const [idGiaoDichDangSua, setIdGiaoDichDangSua] = useState(null);
 
   const chonGiaoDichSua = (id) => {
@@ -54,12 +55,19 @@ function App() {
               xoaGiaoDich={xoaGiaoDich}
               luuGiaoDichSua={luuGiaoDichSua}
               huySua={huySua}
+              danhSachHangMucChi={danhSachHangMucChi}
+              danhSachHangMucThu={danhSachHangMucThu}
             />
           </div>
           
           <div className="side-panel">
             {!idGiaoDichDangSua ? (
-              <TransactionForm luuGiaoDich={luuGiaoDich} />
+              <TransactionForm 
+              luuGiaoDich={luuGiaoDich}
+              danhSachHangMucChi={danhSachHangMucChi}
+              danhSachHangMucThu={danhSachHangMucThu}
+              themHangMuc={themHangMuc}
+               />
             ) : (
               <div className="card edit-placeholder">
                 <h3>Chế độ chỉnh sửa</h3>
